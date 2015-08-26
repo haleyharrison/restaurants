@@ -30,4 +30,21 @@ import java.util.Arrays;
       Cuisine savedCuisine = Cuisine.find(myCuisine.getId());
       assertTrue(myCuisine.equals(savedCuisine));
     }
+    @Test
+    public void update_updatesInformationForAnObject() {
+      Cuisine newCuisine = new Cuisine("thai");
+      newCuisine.save();
+      newCuisine.update("mexican");
+      Cuisine savedCuisine = Cuisine.find(newCuisine.getId());
+      assertEquals("mexican", savedCuisine.getName());
+    }
+
+    @Test
+    public void delete_checkThatDeletesFromDatabase_false() {
+      Cuisine newCuisine = new Cuisine("Japanese");
+      newCuisine.save();
+      newCuisine.delete();
+      Cuisine otherCuisine = Cuisine.find(newCuisine.getId());
+      assertEquals(false, newCuisine.equals(otherCuisine));
+    }
 }
