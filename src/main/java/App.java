@@ -44,13 +44,22 @@ public class App{
       HashMap<String, Object> model = new HashMap<String, Object>();
 
       String cuisine = request.queryParams("cuisine");
-      Cuisine newCuisine = new Cuisine("cuisine");
+      Cuisine newCuisine = new Cuisine(cuisine);
       newCuisine.save();
       model.put("cuisine", newCuisine.getName());
 
       model.put("template", "templates/cuisine.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("cuisines/:id/restaurants/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/restaurants-form.vtl");
+
+      model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":id"))));
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
   }
 }
