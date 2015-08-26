@@ -24,6 +24,33 @@ public class App{
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/cuisines", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      model.put("template", "templates/cuisines.vtl");
+      model.put("cuisines", Cuisine.all());
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/cuisines/new", (request, reponse) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/cuisine-form.vtl");
+
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/cuisines", (request, reponse) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      String cuisine = request.queryParams("cuisine");
+      Cuisine newCuisine = new Cuisine("cuisine");
+      newCuisine.save();
+      model.put("cuisine", newCuisine.getName());
+
+      model.put("template", "templates/cuisine.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
   }
 }
