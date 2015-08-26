@@ -1,0 +1,20 @@
+<h2>Cuisines</h2>
+<form action='/cuisines' method="get">
+    #foreach ($cuisine in $cuisines)
+      #if ($cuisine)
+      <fieldset>
+        <div class="form-group">
+          <label form_id="$cuisine.getName()">$cuisine.getName()</label>
+          <input id="selection" value="$cuisine.getId()" name="$cuisine.getName()" class="form-control" type="radio">
+        </div>
+      </fieldset>
+    #end
+  #end
+<button type="submit" class="btn"> Submit</button>
+</form>
+  <form action="/cuisines/new">
+    <button class="btn btn-default" type="submit">Add a cuisine</button>
+  </form>
+  <form action="/cuisines/$cuisine.getId()/restaurants/new">
+    <button class="btn btn-default" type="submit">Add a restaurnat</button>
+  </form>
