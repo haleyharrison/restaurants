@@ -1,7 +1,7 @@
 
 # _Restaurant_
 
-_Description: An App to keet track of restaurants, cuisines, and reviews._
+_Description: An app to keep track of restaurants, cuisines, and reviews._
 _JUnit and FluentLenium are used for testing. Velocity is used to created web page templates. Spark is used to run the_
 _program on a local server._
 
@@ -18,4 +18,4 @@ _program on a local server._
 
 ## License
 
-_Author: Yelena Belikova_
+_Author: Yelena Belikova & Haley Harrison_
