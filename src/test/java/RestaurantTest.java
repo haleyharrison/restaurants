@@ -32,6 +32,24 @@ import java.util.Arrays;
       Restaurant savedRestaurant = Restaurant.find(myRestaurant.getId());
       assertTrue(myRestaurant.equals(savedRestaurant));
     }
+    @Test
+    public void update_updatesInformationForAnObject() {
+      Restaurant newRest = new Restaurant("mi mero mole", "9:00-15-00", "23424231", 5, 1);
+      newRest.save();
+      newRest.updateRating(1);
+      Restaurant savedRest = Restaurant.find(newRest.getId());
+      assertEquals(1, savedRest.getRating());
+    }
+
+    @Test
+    public void delete_checkThatDeletesFromDatabase_false() {
+      Restaurant newRestaurant = new Restaurant("mi mero mole", "9:00-15-00", "23424231", 5, 1);
+      newRestaurant.save();
+      newRestaurant.delete();
+      Restaurant newRest = Restaurant.find(newRestaurant.getId());
+      assertEquals(false, newRestaurant.equals(newRest));
+    }
+
 
     //
     // private String name;
