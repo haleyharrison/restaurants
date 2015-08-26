@@ -79,10 +79,51 @@ public class Restaurant {
         return restaurant;
     }
   }
+  public void updateRating(int rating) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE restaurants SET rating = :rating WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("rating", rating)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+  public void updateName(String name) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE restaurants SET name = :name WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("name", name)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+  public void updateContact_info(String contact_info) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE restaurants SET contact_info = :contact_info WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("contact_info", contact_info)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+  public void updateHours(String hours) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "UPDATE restaurants SET hours = :hours WHERE id = :id";
+      con.createQuery(sql)
+        .addParameter("hours", hours)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
 
-
-
-
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM restaurants WHERE id = :id";
+        con.createQuery(sql)
+          .addParameter("id", id)
+          .executeUpdate();
+    }
+  }
 
 
 }
