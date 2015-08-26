@@ -32,7 +32,7 @@ import java.util.Arrays;
       Restaurant savedRestaurant = Restaurant.find(myRestaurant.getId());
       assertTrue(myRestaurant.equals(savedRestaurant));
     }
-    
+
     @Test
     public void update_updatesInformationForAnObject() {
       Restaurant newRest = new Restaurant("mi mero mole", "9:00-15-00", "23424231", 5, 1);
@@ -51,3 +51,4 @@ import java.util.Arrays;
       assertEquals(false, newRestaurant.equals(newRest));
     }
   }
+  
