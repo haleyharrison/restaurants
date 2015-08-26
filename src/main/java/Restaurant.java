@@ -35,14 +35,12 @@ public class Restaurant {
     this.rating = rating;
     this.cuisine_id = cuisine_id;
   }
-
   public static List<Restaurant> all()  {
     String sql = "SELECT name, hours, contact_info, rating, cuisine_id FROM restaurants";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Restaurant.class);
     }
   }
-
   @Override
   public boolean equals(Object otherRestaurant) {
     if(!(otherRestaurant instanceof Restaurant)) {
@@ -56,7 +54,6 @@ public class Restaurant {
         this.getCuisine_id() == newRestaurant.getCuisine_id();
     }
   }
-
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO restaurants (name, hours, contact_info, rating, cuisine_id) VALUES (:name, :hours, :contact_info, :rating, :cuisine_id)";
@@ -115,7 +112,6 @@ public class Restaurant {
         .executeUpdate();
     }
   }
-
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "DELETE FROM restaurants WHERE id = :id";
