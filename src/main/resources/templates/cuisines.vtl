@@ -1,14 +1,22 @@
 <h2>Cuisines</h2>
 
-<form action='/cuisines' method="get">
+
   #foreach ($cuisine in $cuisines)
     #if ($cuisine.getName())
-      <ul><li><a href="cuisines/$cuisine.getId()/restaurants">$cuisine.getName()</a></li></ul>
+
+      <ul><li><a href="cuisines/$cuisine.getId()/restaurants">$cuisine.getName()
+        <form action="/cuisines/$cuisine.getId()/delete">
+          <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-remove align-left" aria-hidden="true"></span></button>
+        </form></a>
+
+
+    </li></ul>
+
     #else
       <h6>You haven't added anything yet. Sooo, go do that now :)</h6>
     #end
   #end
-</form>
+
 
 <form action="/cuisines/new">
   <button class="btn btn-default" type="submit">Add Another Cuisine</button>
