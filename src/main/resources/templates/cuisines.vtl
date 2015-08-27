@@ -1,20 +1,19 @@
 <h2>Cuisines</h2>
+
 <form action='/cuisines' method="get">
-    #foreach ($cuisine in $cuisines)
-      #if ($cuisine)
-      <fieldset>
-        <div class="form-group">
-          <label form_id="$cuisine.getName()">$cuisine.getName()</label>
-          <input id="selection" value="$cuisine.getId()" name="$cuisine.getName()" class="form-control" type="radio">
-        </div>
-      </fieldset>
+  #foreach ($cuisine in $cuisines)
+    #if ($cuisine.getName())
+      <ul><li><a href="cuisines/$cuisine.getId()/restaurants">$cuisine.getName()</a>
+      <form action="cuisines/$cuisine.getId()/restaurants/new">
+        <button class="btn btn-warning btn-sm" type="submit">edit</button>
+      </form></li>
+    </ul>
+    #else
+      <h6>You haven't added anything yet. Sooo, go do that now :)</h6>
     #end
   #end
-<button type="submit" class="btn"> Submit</button>
 </form>
-  <form action="/cuisines/new">
-    <button class="btn btn-default" type="submit">Add a cuisine</button>
-  </form>
-  <form action="/cuisines/$cuisine.getId()/restaurants/new">
-    <button class="btn btn-default" type="submit">Add a restaurnat</button>
-  </form>
+
+<form action="/cuisines/new">
+  <button class="btn btn-default" type="submit">Add Another Cuisine</button>
+</form>
