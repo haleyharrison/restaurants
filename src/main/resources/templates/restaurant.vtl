@@ -1,11 +1,11 @@
-#if ($restaurant)
-  <h2>You added: "$restaurant"</h2>
+#if ($restaurant.getName())
+  <h2>You added: "$restaurant.getName()"</h2>
 #else
   <h2>You didn't add anything</h2>
 #end
 <br>
 <br>
 
-<form action="/restaurants">
+<form action="/cuisines/:id/restaurants">
   <button class="btn btn-default" type="submit">restaurants</button>
 </form>
