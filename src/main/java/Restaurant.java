@@ -56,9 +56,8 @@ public class Restaurant {
   }
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO restaurants (id, name, hours, contact_info, rating, cuisine_id) VALUES (:id, :name, :hours, :contact_info, :rating, :cuisine_id)";
+      String sql = "INSERT INTO restaurants ( name, hours, contact_info, rating, cuisine_id) VALUES ( :name, :hours, :contact_info, :rating, :cuisine_id)";
       this.id = (int) con.createQuery(sql, true)
-      .addParameter("id", this.id)
       .addParameter("name", this.name)
       .addParameter("hours", this.hours)
       .addParameter("contact_info", this.contact_info)
@@ -75,6 +74,14 @@ public class Restaurant {
         .addParameter("id", id)
         .executeAndFetchFirst(Restaurant.class);
         return restaurant;
+    }
+  }
+  public static List<Restaurant> allByCuisine(int cuisine_id)  {
+    String sql = "SELECT name, hours, contact_info, rating, cuisine_id FROM restaurants WHERE cuisine_id = :cuisine_id ";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+        .addParameter("cuisine_id", cuisine_id)
+        .executeAndFetch(Restaurant.class);
     }
   }
   public void updateRating(int rating) {
