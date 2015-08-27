@@ -3,11 +3,7 @@
 <form action='/cuisines' method="get">
   #foreach ($cuisine in $cuisines)
     #if ($cuisine.getName())
-      <ul><li><a href="cuisines/$cuisine.getId()/restaurants">$cuisine.getName()</a>
-      <form action="cuisines/$cuisine.getId()/restaurants/new">
-        <button class="btn btn-warning btn-sm" type="submit">edit</button>
-      </form></li>
-    </ul>
+      <ul><li><a href="cuisines/$cuisine.getId()/restaurants">$cuisine.getName()</a></li></ul>
     #else
       <h6>You haven't added anything yet. Sooo, go do that now :)</h6>
     #end
