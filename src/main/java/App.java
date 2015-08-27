@@ -71,8 +71,7 @@ public class App{
 
       Restaurant newRestaurant = new Restaurant(name, hours, contact_info, rating, cuisine_id);
       newRestaurant.save();
-
-      model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":id"))));
+      model.put("cuisine", Cuisine.find(Integer.parseInt(request.queryParams("cuisine_id"))));
       model.put("restaurant", newRestaurant);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
