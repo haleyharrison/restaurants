@@ -36,7 +36,7 @@ public class Restaurant {
     this.cuisine_id = cuisine_id;
   }
   public static List<Restaurant> all()  {
-    String sql = "SELECT name, hours, contact_info, rating, cuisine_id FROM restaurants";
+    String sql = "SELECT id, name, hours, contact_info, rating, cuisine_id FROM restaurants";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Restaurant.class);
     }
@@ -77,7 +77,7 @@ public class Restaurant {
     }
   }
   public static List<Restaurant> allByCuisine(int cuisine_id)  {
-    String sql = "SELECT name, hours, contact_info, rating, cuisine_id FROM restaurants WHERE cuisine_id = :cuisine_id ";
+    String sql = "SELECT id, name, hours, contact_info, rating, cuisine_id FROM restaurants WHERE cuisine_id = :cuisine_id ";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql)
         .addParameter("cuisine_id", cuisine_id)
