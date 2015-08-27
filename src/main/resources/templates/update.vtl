@@ -1,0 +1,25 @@
+<h2>update $restaurant.getName()</h2>
+<br>
+<form method="post" action="/info">
+  <div class="form-group">
+    <label for="name" class="name">name</label>
+    <input name="name" type="text" placeholder="$restaurant.getName()" class="form-control" id="name">
+  </div>
+  <div class="form-group">
+    <label for="hours" class="hours">hours</label>
+    <input name="hours" type="text" placeholder="$restaurant.getHours()" class="form-control" id="hours">
+  </div>
+  <div class="form-group">
+    <label for="contact_info" class="contact_info">contact_info</label>
+    <input name="contact_info" type="text" placeholder="$restaurant.getContact_info()" class="form-control" id="contact_info">
+  </div>
+  <div class="form-group">
+    <label for="rating" class="rating">rating</label>
+    <input name="rating" type="text" placeholder="$restaurant.getRating()" class="form-control" id="rating">
+  </div>
+  <div class="form-group">
+    <input name="restaurant_id" value="$restaurant.getId()" type="hidden" class="form-control" id="cuisine_id">
+  </div>
+  <br>
+  <button class="btn btn-default" type="submit">add!</button>
+</form>
