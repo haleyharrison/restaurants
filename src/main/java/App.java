@@ -71,6 +71,7 @@ public class App{
 
       Restaurant newRestaurant = new Restaurant(name, hours, contact_info, rating, cuisine_id);
       newRestaurant.save();
+      
       model.put("cuisine", Cuisine.find(Integer.parseInt(request.queryParams("cuisine_id"))));
       model.put("restaurant", newRestaurant);
       return new ModelAndView(model, layout);
@@ -82,6 +83,15 @@ public class App{
 
       model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":id"))));
       model.put("restaurants", Restaurant.all());
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/cuisines/:cuisine_id/restaurants/:restaurant_id/info", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/info.vtl");
+
+      model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":cuisine_id"))));
+      model.put("restaurant", Restaurant.find(Integer.parseInt(request.params(":restaurant_id"))));
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
