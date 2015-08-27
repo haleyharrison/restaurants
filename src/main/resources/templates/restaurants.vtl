@@ -1,0 +1,9 @@
+<h4>restaurants for $cuisine.getName():</h4>
+
+#foreach ($restaurant in $restaurants)
+  #if ($restaurant.getName())
+    <ul><li><h3>$restaurant.getName()</h3></li></ul>
+  #else
+    <h6>You haven't added anything yet. Sooo, go do that now :)</h6>
+  #end
+#end
