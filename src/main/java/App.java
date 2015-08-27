@@ -79,10 +79,13 @@ public class App{
 
     get("/cuisines/:id/restaurants", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/restaurants.vtl");
+
+
 
       model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":id"))));
       model.put("restaurants", Restaurant.allByCuisine(Integer.parseInt(request.params(":id"))));
+      model.put("template", "templates/restaurants.vtl");
+      
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -124,7 +127,31 @@ public class App{
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    // post("/delete", (request, reponse) -> {
+    //   HashMap<String, Object> model = new HashMap<String, Object>();
+    //
+    //   Restaurant rest = Restaurant.find(Integer.parseInt(request.queryParams("delete")));
+    //
+    //   rest.delete();
+    //
+    //   model.put("restaurants", Restaurant.allByCuisine(Integer.parseInt(request.params(":id"))));
+    //   model.put("template", "templates/restaurants.vtl");
+    //   return new ModelAndView(model, layout);
+    // }, new VelocityTemplateEngine());
 
+    get("/cuisines/:cuisine_id/restaurants/:restaurant_id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params(":cuisine_id")));
+      model.put("cuisine", cuisine);
+      String cuisine_id = request.params(":cuisine_id");
+
+      Restaurant rest = Restaurant.find(Integer.parseInt(request.params(":restaurant_id")));
+      rest.delete();
+      // model.put("template", "templates/delete.vtl");
+      response.redirect("/cuisines/" + cuisine_id);
+      return null;
+    });
   }
 
 
