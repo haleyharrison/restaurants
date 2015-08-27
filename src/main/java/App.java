@@ -81,11 +81,10 @@ public class App{
       HashMap<String, Object> model = new HashMap<String, Object>();
 
 
-
       model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":id"))));
       model.put("restaurants", Restaurant.allByCuisine(Integer.parseInt(request.params(":id"))));
       model.put("template", "templates/restaurants.vtl");
-      
+
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -149,9 +148,22 @@ public class App{
       Restaurant rest = Restaurant.find(Integer.parseInt(request.params(":restaurant_id")));
       rest.delete();
       // model.put("template", "templates/delete.vtl");
-      response.redirect("/cuisines/" + cuisine_id);
+      response.redirect("/cuisines/" + cuisine_id + "/restaurants");
       return null;
     });
+
+    get("/cuisines/:cuisine_id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+
+      Cuisine cuisine = Cuisine.find(Integer.parseInt(request.params(":cuisine_id")));
+      cuisine.delete();
+
+      response.redirect("/cuisines" );
+      return null;
+    });
+
+
+
   }
 
 
