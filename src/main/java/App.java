@@ -62,8 +62,16 @@ public class App{
     post("/restaurants", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/restaurant.vtl");
+      String name = request.queryParams("name");
+      String hours = request.queryParams("hours");
+      String contact_info = request.queryParams("contact_info");
+      int rating = Integer.parseInt(request.queryParams("rating"));
+      int cuisine_id = Integer.parseInt(request.queryParams("cuisine_id"));
 
-      model.put("restaurant", "newRestaurant.getName()");
+      Restaurant newRestaurant = new Restaurant(name, hours, contact_info, rating, cuisine_id);
+      newRestaurant.save();
+
+      model.put("restaurant", newRestaurant);
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
