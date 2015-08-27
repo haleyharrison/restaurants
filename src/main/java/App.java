@@ -26,10 +26,9 @@ public class App{
 
     get("/cuisines", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-
       model.put("template", "templates/cuisines.vtl");
-      model.put("cuisines", Cuisine.all());
 
+      model.put("cuisines", Cuisine.all());
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
@@ -46,20 +45,35 @@ public class App{
       String cuisine = request.queryParams("cuisine");
       Cuisine newCuisine = new Cuisine(cuisine);
       newCuisine.save();
-      model.put("cuisine", newCuisine.getName());
 
+      model.put("cuisine", newCuisine);
       model.put("template", "templates/cuisine.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     get("cuisines/:id/restaurants/new", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("template", "templates/restaurants-form.vtl");
+      model.put("template", "templates/restaurant-form.vtl");
 
       model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":id"))));
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/restaurants", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/restaurant.vtl");
 
+      model.put("restaurant", "newRestaurant.getName()");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("cuisines/:id/restaurants", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/restaurants.vtl");
+
+      model.put("cuisine", Cuisine.find(Integer.parseInt(request.params(":id"))));
+      model.put("restaurants", Restaurant.all());
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }
