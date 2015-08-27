@@ -3,6 +3,11 @@
 #foreach ($restaurant in $restaurants)
   #if ($restaurant.getName())
     <ul><li><a href="/cuisines/$cuisine.getId()/restaurants/$restaurant.getId()/info">$restaurant.getName()</a></li></ul>
+
+    <form action="/cuisines/$cuisine.getId()/restaurants/$restaurant.getId()/delete">
+      <button class="btn btn-default" type="submit">delete</button>
+    </form>
+
   #else
     <h6>You haven't added anything yet. Sooo, go do that now :)</h6>
   #end
